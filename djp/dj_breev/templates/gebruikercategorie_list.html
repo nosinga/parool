@@ -1,0 +1,36 @@
+{% if gebruikercategories %}
+  <ul class="gebruikercategories"> 
+    {% for gebruikercategorie in gebruikercategories %}
+    <li>
+          Categorie <b>{{ gebruikercategorie.categorie }} </b> | Volgorde <b>{{ gebruikercategorie.volgorde }} </b> | Aantal Artikelen <b> {{ gebruikercategorie.aantal_artikelen }}</b>
+        {% if show_edit %}
+          <a href="{{ gebruikercategorie.categorie }}" class="categorie"></a>
+          <a href="/gebruikercategoriesave/?categorie={{ gebruikercategorie.categorie }}" class="edit">
+            [edit]</a>
+        {% endif %}
+        <br>  
+        {% if show_tags %}
+          Tags:
+          {% if gebruikercategorie.categorie_set.all %}
+            <ul class="categories">
+              {% for categorie in gebruikercategorie.categorie_set.all %}
+                <li><a href="/categorie/{{ categorie.name|urlencode }}/">{{ categorie.name }}</a></li>
+              {% endfor %}
+            </ul>
+          {% else %}
+             None.
+          {% endif %}
+          <br />
+        {% endif %}
+        {% if show_user %}
+          Posted by:
+          <a href="/user/{{ gebruikercategorie.user.username }}/"
+            class="username">
+            {{ gebruikercategorie.user.username }} </a>
+        {% endif %}
+     </li>   
+    {% endfor %}  
+  </ul>
+{% else %}
+  <p>No gebruikercategories found</p>
+{% endif %} 

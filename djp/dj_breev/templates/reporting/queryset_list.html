@@ -1,0 +1,97 @@
+{% extends "admin/base_site.html" %}
+{% load adminmedia admin_list i18n %}
+
+{% block extrastyle %}
+  <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/changelists.css" />
+  <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />
+
+{% endblock %}
+
+
+{% block bodyclass %}change-list{% endblock %}
+
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="/admin/">{% trans "Home" %}</a> &rsaquo;
+     <a href="/reporting/">{%trans "Run reports" %}</a> &rsaquo;
+     {{report.domain}} &rsaquo; {{report.name}}
+
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+  <div id="content-main">
+    {% block object-tools %}{% endblock %}
+
+    <div id="changelist">
+
+		<h3>Domain name : {{report.domain}}</h3>
+		<h2>Report name : {{report.name}}</h2>
+
+    {% if bindvariables %}
+      <!-- Container -->
+      <div id="container">
+      
+          
+      <!-- Content -->
+         <div id="content" class="colM">
+              
+           <h1>fill in variables</h1>
+      
+           <div id="content-main">
+      
+             <form enctype="multipart/form-data" action="." method="post" id="run-report">{% csrf_token %}
+                <div>
+                   <fieldset class="module aligned">
+                     {% for key,value in bindvariables.items %}
+                        <div class="form-row {{bindvariable}}">
+                           <div>
+                              <label for="id_{{ key}}" class="required">{{ key|capfirst}}:</label>
+                              <input id="id_{{ key}}" type="text" value="{{value}}" class="vTextField" name="{{ key}}" maxlength="100" />
+                           </div>
+                        </div>
+                     {% endfor  %}
+                   </fieldset>
+                   <div class="submit-row" >
+                      <input type="submit" value="Run report" class="default" name="_save" />
+                   </div>
+                </div>
+             </form>
+           </div>
+           <br class="clear" />
+         </div>
+      <!-- END Content -->
+        <div id="footer"></div>
+      </div>
+      <!-- END Container -->
+    {% endif %}
+    {% if results %}
+       <div class="module" id="changelist">
+         <div class="results">
+           <table cellspacing="0" id="result_list">
+             <thead>
+               <tr>
+               {% for header in result_headers %}
+                  <th scope="col">
+                     {{ header|capfirst }}
+                  </th>
+               {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+              {% for result in results %}
+                 <tr class="{% cycle 'row1' 'row2' %}">{% for item in result %}<td>{{ item }}</td>{% endfor %}</tr>
+              {% endfor %}
+              </tbody>
+           </table>
+         </div>
+	    </div>
+	  {% else  %}
+       {{ message }}
+    {% endif %}
+    </div>
+  </div>
+{% endblock %}

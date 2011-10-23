@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+  {% block external %}
+    <script type="text/javascript"
+      src="/site_media/gebruikercategorie_edit.js" >
+    </script>  
+  {% endblock %}
+{% block title %}{{ username }}{% endblock %}
+{% block head %}Instellingen voor {{ username }}{% endblock %}
+{% block content %}
+{% include "gebruikercategorie_list.html" %}
+{% endblock %}

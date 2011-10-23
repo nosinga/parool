@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Artikel : {{article.titel }}
+{% endblock %}
+{% block head %}
+{% if user.username != '' %}
+  <a href="/vote_plus/{{ article.id }} "
+    class="vote">[+]</a>
+  <a href="/vote_min/{{ article.id }} "
+    class="vote">[-]</a>
+{% endif %}
+  <a href="{{ article.url }}"
+    class="title">
+    {{ article.titel }} </a> 
+{% endblock %}
+{% block content %}
+   {{ article.body_clean }}
+{% endblock %}

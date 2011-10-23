@@ -1,0 +1,62 @@
+{% extends "admin/base_site.html" %}
+{% load adminmedia admin_list i18n %}
+
+{% block extrastyle %}
+  <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/changelists.css" />
+{% endblock %}
+
+
+{% block bodyclass %}change-list{% endblock %}
+
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+     <a href="/admin/">{% trans "Home" %}</a> &rsaquo;
+     Run Reports
+
+</div>
+{% endblock %}
+
+
+
+{% block content %}
+  <div id="content-main">
+    {% block object-tools %}{% endblock %}
+
+		{% if static_reports %}
+    <div id="changelist">
+
+		<H2>Reports</H2>
+
+      <div id="changelist">
+            {% regroup static_reports|dictsort:"domain" by domain as report_list %}
+            {% for domain in report_list %}
+                <h3>{{ domain.grouper }}</h3>
+                {% for report in domain.list|dictsort:"name" %}
+                    <a href="{% url static-reports-view report.id %}">{{ report.name }}</a><br />
+                {% endfor %}
+            {% endfor %}
+	    </div>
+    </div>
+    {% endif %}
+
+		{% if flex_reports %}
+    <div id="changelist">
+
+		<H2>Flexible Reports (saved in database instead of in file)</H2>
+
+      <div id="changelist">
+            {% regroup flex_reports|dictsort:"domain" by domain as report_list %}
+            {% for domain in report_list %}
+                <h3>{{ domain.grouper }}</h3>
+                {% for report in domain.list|dictsort:"name" %}
+                    <a href="{% url flex-reports-view report.id %}">{{ report.name }}</a><br />
+                {% endfor %}
+            {% endfor %}
+	    </div>
+    </div>
+    {% endif %}
+
+
+  </div>
+{% endblock %}

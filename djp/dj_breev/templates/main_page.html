@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Welkom bij Breev.me{% endblock %}
+{% block head %}Welkom bij Breev.me{% endblock %}
+{% block content %}
+     {% if user.username %}
+        <p>Welkom <b>{{ user.username }}</b> 
+           hier kun je je gepersonaliseerde nieuws lezen en hierop commentaar geven</p>
+     {% else %}
+        <p>Welkom onbekende gebruiker. Door in te <a href="/login/">loggen</a>
+           kun je gepersonaliseerd nieuws te lezen 
+           en hierop commentaar geven</p>
+     {% endif %}
+     <h2>Belangrijkste artikelen</h2>
+     {% include "ranked_article_list.html" %}
+{% endblock %}

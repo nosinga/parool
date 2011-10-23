@@ -1,0 +1,13 @@
+{% if ranked_articles %}
+  <ul class="articles">
+    {% for ranked_article in ranked_articles %}
+      <li>
+        <a href="/article/{{ ranked_article.artikel_id }}/" class="title">
+           {{ ranked_article.artikel_titel }}</a> {{ ranked_article.krant }} {{ ranked_article.pubdate_yyyymmdd }} | {{ ranked_article.categorie }} | {{ ranked_article.rank }}  
+        <br />
+      </li>
+    {% endfor %}  
+  </ul>
+{% else %}
+  <p>No articles found</p>
+{% endif %}        

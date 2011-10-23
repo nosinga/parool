@@ -1,0 +1,21 @@
+<VirtualHost *:8080>
+        WSGIScriptAlias / /home/nos/workspaces/auk/djp/dj_breev/apache/wsgi/dj_breev.wsgi
+        WSGIDaemonProcess dj_breev
+        WSGIProcessGroup dj_breev
+
+	ServerAdmin nosinga@gmail.com
+
+
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel debug
+
+	ErrorLog /var/log/apache2/error.log
+	CustomLog /var/log/apache2/access.log combined
+
+        Alias /static/admin   /usr/local/lib/python2.6/dist-packages/django/contrib/admin/media/
+        Alias /site_media   /home/nos/workspaces/auk/djp/dj_breev/site_media/
+           
+
+</VirtualHost>
