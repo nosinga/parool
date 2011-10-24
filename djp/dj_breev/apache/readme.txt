@@ -17,13 +17,13 @@ Listen 8080
    in this file the VirtualHost on port 8080 directive is defined
 
    make this file available to apache by an symbolic link
-   /etc/apache2/sites-available$ sudo ln -sf /home/nos/workspaces/auk/djp/dj_breev/apache/conf/dj_breev
+   /etc/apache2/sites-available$ sudo ln -sf /home/parool/workspaces/parool/djp/dj_breev/apache/conf/dj_breev
 
 
 4. enable the new dj_breev site with the a2ensite command
    (this script also creates a symbolic link
    , using the script seems the default way 
-     to enable or disable an available sitein Apache) 
+     to enable or disable an available site in Apache) 
    /etc/apache2/sites-available$ sudo a2ensite dj_breev
 
 5. in settings.py change the following entries

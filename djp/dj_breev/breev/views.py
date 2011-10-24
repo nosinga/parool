@@ -154,7 +154,7 @@ def user_preference_page(request, user_id) :
 
   if user.username == request.user.username :
     sqlstatement = get_sql('user_preference_page','gebruikercategories',)
-    gebruikercategories_cn = get_sqlrecordset_with_columnnames(sqlstatement,[user.id])
+    columnnames, gebruikercategories_cn = get_sqlrecordset_with_columnnames(sqlstatement,[user.id])
 
     variables = RequestContext (request,{
      'gebruikercategories' : gebruikercategories_cn,
