@@ -55,9 +55,7 @@ def recordset2recordset_with_columnnames(recordset,cursor_description) :
   recordset_with_columnnames = []
   for record in recordset :
     recordlist = zip(columnnames,record)
-    print recordlist
     recorddict = dict(recordlist)
-#    print recorddict
     recordset_with_columnnames.append(recorddict)
 
   return columnnames, recordset_with_columnnames
